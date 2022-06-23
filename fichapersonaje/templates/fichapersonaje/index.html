@@ -1,0 +1,10 @@
+{% if personajes %}
+    <ul>
+        {% for personaje in personajes %}
+        <li><a href="{% url 'fichapersonaje:detail' personaje.id %}"> {{ personaje.nombre_personaje }}</a></li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No hay personajes creados aún.</p>
+{% endif %}
+<input type="submit" value="Crear nuevo personaje" href="fichapersonaje:detail">
