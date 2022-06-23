@@ -7,4 +7,4 @@
 {% else %}
     <p>No hay personajes creados aún.</p>
 {% endif %}
-<input type="submit" value="Crear nuevo personaje" href="fichapersonaje:detail">
+<a href="{% url 'fichapersonaje:crearpersonaje'%}">Crear nuevo personaje</a>

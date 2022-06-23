@@ -1,0 +1,15 @@
+<form action="{% url 'fichapersonaje:cambiardatos' personaje.id %}" method="post">
+{% csrf_token %}
+<fieldset>
+    <legend><h1>{{ personaje.nombre_personaje }}</h1></legend>
+    <input 
+    type = "text"
+    '''Name es como llamaremos a cada variable desde django, en este caso el nombre de la persona lo llamaremos con el nombre: nombre'''
+    name = "nombre"     
+    id = "personaje{{ forloop.counter }}"
+    value = "{{ personaje.nombre_personaje }}"
+    required
+    >
+<input type="submit" value="guardar">
+</fieldset>
+</form>
