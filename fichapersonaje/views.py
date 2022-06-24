@@ -40,3 +40,7 @@ def cambiarDatos(request, personaje_id):
     personaje.nombre_personaje = request.POST.get('nombre') #Es el nombre del formulario que se envía en el template de detail
     personaje.save()
     return HttpResponseRedirect(reverse('fichapersonaje:index'))
+
+def eliminarPersonaje(request, personaje_id):
+    Personaje.objects.get(pk=personaje_id).delete()
+    return HttpResponseRedirect(reverse('fichapersonaje:index'))
