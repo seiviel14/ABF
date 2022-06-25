@@ -12,7 +12,9 @@
     >
     <label for="personaje{{ forloop.counter }}">Nombre</label>
     <br>
-    {% for caracteristica in personaje.caracteristicas_set.all %}
+</fieldset>
+<fieldset>
+    {% for caracteristica in personaje.caracteristica_set.all %}
         <input
             type = "text"
             name = "{{ caracteristica.nombre_caracteristica }}"
@@ -23,8 +25,21 @@
         <label for="caracteristica{{ forloop.counter }}">{{ caracteristica.nombre_caracteristica }}</label>
         <br>
     {% endfor %}
-<input type="submit" value="Guardar">
 </fieldset>
+<fieldset>
+    {% for secundaria in personaje.secundaria_set.all %}
+        <input
+            type = "text"
+            name = "{{ secundaria.nombre_secundaria }}"
+            id = "secundaria{{ forloop.counter }}"
+            value = "{{ secundaria.valor }}"
+            required
+        >
+        <label for="secundaria{{ forloop.counter }}">{{ secundaria.nombre_secundaria }}</label>
+        <br>
+    {% endfor %}
+</fieldset>
+<input type="submit" value="Guardar">
 </form>
 
 <a href="{% url 'fichapersonaje:eliminarpersonaje' personaje.id %}" method = "post"><input type="submit" value = "Borrar personaje"></a>

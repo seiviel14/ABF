@@ -1,7 +1,7 @@
 from django.db import models
 from django.forms import CharField, ModelForm
 
-from .models import Personaje, Caracteristicas
+from .models import Personaje
 
 class CrearPersonaje(ModelForm):
     class Meta:
