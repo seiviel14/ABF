@@ -59,9 +59,15 @@ def cambiarDatos(request, personaje_id):
     personaje = get_object_or_404(Personaje, pk=personaje_id)
     personaje.nombre_personaje = request.POST.get('nombre') #Es el nombre del formulario que se envía en el template de detail
     for nombre_caracteristica in secundarias_caracteristicas:
-        caracteristica = get_object_or_404(Caracteristica, personaje = personaje, nombre_caracteristica=nombre_caracteristica)
+        caracteristica = get_object_or_404(Caracteristica, personaje = personaje, nombre_caracteristica = nombre_caracteristica)
         caracteristica.valor = request.POST.get(nombre_caracteristica)
         caracteristica.save()
+
+        for nombre_secundaria in secundarias_caracteristicas[nombre_caracteristica]:
+            secundaria = get_object_or_404(Secundaria, personaje = personaje, caracteristica = caracteristica, nombre_secundaria = nombre_secundaria)
+            secundaria.valor = request.POST.get(nombre_secundaria)
+            secundaria.save()
+
     personaje.save()
     return HttpResponseRedirect(reverse('fichapersonaje:index'))
         
@@ -75,12 +81,14 @@ def eliminarPersonaje(request, personaje_id):
 def crearDetalles(request, personaje_id):
     personaje = get_object_or_404(Personaje, pk=personaje_id)
     if not Caracteristica.objects.filter(personaje=personaje):
-        for caracteristica in secundarias_caracteristicas:
-            Caracteristica.objects.create(personaje=personaje,nombre_caracteristica=caracteristica)
-            caracteristicaObjeto = Caracteristica.objects.get(personaje=personaje,nombre_caracteristica=caracteristica)
-            for secundaria in secundarias_caracteristicas[caracteristica]:
+        for nombre_caracteristica in secundarias_caracteristicas:
+            Caracteristica.objects.create(personaje=personaje,nombre_caracteristica=nombre_caracteristica )
+            caracteristica = Caracteristica.objects.get(personaje=personaje,nombre_caracteristica=nombre_caracteristica )
+
+            for secundaria in secundarias_caracteristicas[nombre_caracteristica]:
                 campo_secundaria = [campo for campo, secundarias in campos_secundarias.items() for secundaria_nombre in secundarias if secundaria_nombre == secundaria]
-                Secundaria.objects.create(personaje=personaje, caracteristica=caracteristicaObjeto,nombre_secundaria=secundaria, campo=campo_secundaria[0])
+                Secundaria.objects.create(personaje=personaje, caracteristica=caracteristica,nombre_secundaria=secundaria, campo=campo_secundaria[0])
+                
         return HttpResponseRedirect(reverse('fichapersonaje:detail', args=(personaje.id,)))
     else:
         return HttpResponseRedirect(reverse('fichapersonaje:detail', args=(personaje.id,)))

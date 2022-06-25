@@ -12,7 +12,7 @@ class Personaje(models.Model):
 class Caracteristica(models.Model):
     personaje = models.ForeignKey(Personaje, on_delete=models.CASCADE)
     nombre_caracteristica = models.CharField(max_length=15)
-    valor = models.CharField(max_length=2, default=0)
+    valor = models.CharField(max_length=2, default=1)
     
     def __str__(self):
         return "La característica %s tiene un valor de %s" % (self.nombre_caracteristica,self.valor)

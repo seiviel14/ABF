@@ -29,13 +29,14 @@
 <fieldset>
     {% for secundaria in personaje.secundaria_set.all %}
         <input
+        '''HACE FALTA ORDENAR POR CAMPO'''
             type = "text"
             name = "{{ secundaria.nombre_secundaria }}"
             id = "secundaria{{ forloop.counter }}"
             value = "{{ secundaria.valor }}"
             required
         >
-        <label for="secundaria{{ forloop.counter }}">{{ secundaria.nombre_secundaria }}</label>
+        <label for="secundaria{{ forloop.counter }}">{{ secundaria.nombre_secundaria }} -- {{ secundaria.valor }}</label>
         <br>
     {% endfor %}
 </fieldset>
