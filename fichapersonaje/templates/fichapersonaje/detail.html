@@ -10,6 +10,19 @@
     value = "{{ personaje.nombre_personaje }}"
     required
     >
+    <label for="personaje{{ forloop.counter }}">Nombre</label>
+    <br>
+    {% for caracteristica in personaje.caracteristicas_set.all %}
+        <input
+            type = "text"
+            name = "{{ caracteristica.nombre_caracteristica }}"
+            id = "caracteristica{{ forloop.counter }}"
+            value = "{{ caracteristica.valor }}"
+            required
+        >
+        <label for="caracteristica{{ forloop.counter }}">{{ caracteristica.nombre_caracteristica }}</label>
+        <br>
+    {% endfor %}
 <input type="submit" value="Guardar">
 </fieldset>
 </form>

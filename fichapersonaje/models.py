@@ -5,18 +5,6 @@ from django.forms import CharField
 
 class Personaje(models.Model):
     nombre_personaje = models.CharField(max_length=200)
-    caracteristicas = []
-
-    '''def crear_caracteristicas(self):
-        caracteristicas = [
-        Caracteristicas(personaje = self.pk, nombre_caracteristica = "agi"),
-        Caracteristicas(personaje = self.pk, nombre_caracteristica = "con"),
-        Caracteristicas(personaje = self.pk, nombre_caracteristica = "des"),
-        Caracteristicas(personaje = self.pk, nombre_caracteristica = "fue"),
-        Caracteristicas(personaje = self.pk, nombre_caracteristica = "int"),
-        Caracteristicas(personaje = self.pk, nombre_caracteristica = "per"),
-        Caracteristicas(personaje = self.pk, nombre_caracteristica = "pod"),
-        Caracteristicas(personaje = self.pk, nombre_caracteristica = "vol")]'''
 
     def __str__(self):
         return self.nombre_personaje
@@ -24,7 +12,11 @@ class Personaje(models.Model):
 class Caracteristicas(models.Model):
     personaje = models.ForeignKey(Personaje, on_delete=models.CASCADE)
     nombre_caracteristica = models.CharField(max_length=15)
-    caracteristica = models.CharField(max_length=2)
+    valor = models.CharField(max_length=2, default=0)
     
     def __str__(self):
-        return "Las característica %d tiene un valor de %d",(self.nombre_característica,self.caracteristica)
+        return "La característica %s tiene un valor de %s" % (self.nombre_caracteristica,self.valor)
+
+    def bonificador(self):
+        bonificador = {1:-30,2:-20,3:-10,4:-5,5:0,6:5,7:5,8:10,9:10,10:15,11:20,12:20,13:25,14:25,15:30,16:35,17:35,18:40,19:40,20:45}
+        return bonificador[self.valor]

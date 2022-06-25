@@ -14,4 +14,5 @@ urlpatterns = [
     #url.dom/FichaPersonaje/cambiardatos/2
     path('cambiardatos/<int:personaje_id>/', views.cambiarDatos, name = 'cambiardatos'),
     path('eliminarpersonaje/<int:personaje_id>/', views.eliminarPersonaje, name = 'eliminarpersonaje'),
+    path('creardetalles/<int:personaje_id>', views.crearDetalles, name = 'creardetalles'),
 ]

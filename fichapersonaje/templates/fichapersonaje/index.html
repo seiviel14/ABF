@@ -1,7 +1,7 @@
 {% if personajes %}
     <ul>
         {% for personaje in personajes %}
-        <li><a href="{% url 'fichapersonaje:detail' personaje.id %}"> {{ personaje.nombre_personaje }}</a></li>
+        <li><a href="{% url 'fichapersonaje:creardetalles' personaje.id %}"> {{ personaje.nombre_personaje }}</a></li>
         {% endfor %}
     </ul>
 {% else %}
