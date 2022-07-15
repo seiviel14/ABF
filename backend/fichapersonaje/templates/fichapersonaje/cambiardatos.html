@@ -1,0 +1,44 @@
+<form action="{% url 'fichapersonaje:cambiodatos' personaje.id %}" method="post">
+{% csrf_token %}
+<fieldset>
+    <legend><h1>{{ personaje.nombre_personaje }}</h1></legend>
+    <input 
+    type = "text"
+    '''Name es como llamaremos a cada variable desde django, en este caso el nombre de la persona lo llamaremos con el nombre: nombre'''
+    name = "nombre"     
+    id = "personaje{{ forloop.counter }}"
+    value = "{{ personaje.nombre_personaje }}"
+    required
+    >
+    <label for="personaje{{ forloop.counter }}">Nombre</label>
+    <br>
+</fieldset>
+<fieldset>
+    {% for caracteristica in personaje.caracteristica_set.all %}
+        <input
+            type = "text"
+            name = "{{ caracteristica.nombre_caracteristica }}"
+            id = "caracteristica{{ forloop.counter }}"
+            value = "{{ caracteristica.valor }}"
+            required
+        >
+        <label for="caracteristica{{ forloop.counter }}">{{ caracteristica.nombre_caracteristica }}</label>
+        <br>
+    {% endfor %}
+</fieldset>
+<fieldset>
+    {% for secundaria in personaje.secundaria_set.all %}
+        <input
+        '''HACE FALTA ORDENAR POR CAMPO'''
+            type = "text"
+            name = "{{ secundaria.nombre_secundaria }}"
+            id = "secundaria{{ forloop.counter }}"
+            value = "{{ secundaria.valor }}"
+            required
+        >
+        <label for="secundaria{{ forloop.counter }}">{{ secundaria.nombre_secundaria }} -- {{ secundaria.valor }}</label>
+        <br>
+    {% endfor %}
+</fieldset>
+<input type="submit" value="Guardar">
+</form>
