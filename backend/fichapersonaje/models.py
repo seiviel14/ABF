@@ -1,5 +1,4 @@
 from django.db import models
-from django.forms import CharField
 
 # Create your models here.
 
@@ -9,7 +8,7 @@ class Personaje(models.Model):
     def __str__(self):
         return self.nombre_personaje
 
-class Caracteristica(models.Model):
+'''class Caracteristica(models.Model):
     personaje = models.ForeignKey(Personaje, on_delete=models.CASCADE)
     nombre_caracteristica = models.CharField(max_length=15)
     valor = models.CharField(max_length=2, default=1)
@@ -35,4 +34,4 @@ class Secundaria(models.Model):
         self.valor = suma
 
     def __str__(self):
-        return "%s: %s" % (self.nombre_secundaria,self.valor)
+        return "%s: %s" % (self.nombre_secundaria,self.valor)'''

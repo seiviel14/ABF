@@ -6,11 +6,13 @@ app_name = "fichapersonaje"
 
 urlpatterns = [
     #url.dom/FichaPersonaje/
-    path('', views.IndexView.as_view(), name = 'index'),
+    path('', views.personaje, name = 'personaje'),
     #url.dom/FichaPersonaje/2
-    path('<int:pk>/', views.PersonajeView.as_view(), name = 'detail'),
+    path('<int:pk>/', views.personajeDetail, name = 'detail'),
     #url.dom/FichaPersonaje/crearpersonaje/
-    path('crearpersonaje/', views.crearPersonaje, name = 'crearpersonaje'),
+    
+]
+'''path('crearpersonaje/', views.crearPersonaje, name = 'crearpersonaje'),
     #url.dom/FichaPersonaje/cambiardatos/2
     path('cambiardatos/<int:pk>/', views.CambiarDatosView.as_view(), name = 'cambiardatos'),
     
@@ -18,5 +20,4 @@ urlpatterns = [
 
     path('eliminarpersonaje/<int:personaje_id>/', views.eliminarPersonaje, name = 'eliminarpersonaje'),
     
-    path('creardetalles/<int:personaje_id>', views.crearDetalles, name = 'creardetalles'),
-]
+    path('creardetalles/<int:personaje_id>', views.crearDetalles, name = 'creardetalles'),'''
