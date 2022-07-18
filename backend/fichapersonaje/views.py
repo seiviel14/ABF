@@ -9,7 +9,7 @@ from .models import Personaje#, Caracteristica, Secundaria
 from .static.fichapersonaje.tablas.tablas import campos_secundarias, secundarias_caracteristicas
 from .serializers import PersonajeSerializer
 
-def index(request):
+def front(request):
     context = {}
     return render(request, 'index.html', context)
 
@@ -27,7 +27,7 @@ def personaje(request):
             return Response(status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-@api_view(['DELETE'])
+@api_view(['DELETE', 'GET'])
 def personajeDetail(request, pk):
     try:
         personaje = get_object_or_404(Personaje, pk=pk)
@@ -37,6 +37,9 @@ def personajeDetail(request, pk):
     if request.method == 'DELETE':
         personaje.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+    elif request.method == 'GET':
+        serializer = PersonajeSerializer(personaje)
+        return Response(serializer.data)
 
 '''# Create your views here.
 class IndexView(generic.ListView):

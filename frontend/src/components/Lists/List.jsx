@@ -1,3 +1,5 @@
+import { Outlet  } from "react-router-dom";
+
 function List(props){
     function handleClick() {
         props.deletion(props.id)
@@ -8,7 +10,8 @@ function List(props){
             <h1>Nombre: {props.nombre_personaje}</h1>
             <br />
             <button onClick={handleClick}>Eliminar</button>
+            <Outlet />
         </div>
     )
 }
-export default List;
+export { List };
